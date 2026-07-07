@@ -7,21 +7,24 @@ Simulação de segmentação de rede utilizando VLANs e roteamento entre elas po
 ---
 
 ## Objetivo
+
 Implementar uma rede segmentada em VLANs para separar departamentos distintos e permitir a comunicação entre eles através de um roteador configurado com subinterfaces e encapsulamento IEEE 802.1Q.
 
 ---
 
 ## Cenário
-Uma pequena empresa possui dois departamentos:
+
+Imagine uma pequena empresa com dois departamentos:
 
 - **VLAN 10** – TI
 - **VLAN 20** – Financeiro
 
-Cada departamento pertence a uma rede diferente, o que impede a comunicação direta entre eles. O roteador é responsável por fazer o roteamento entre as VLANs.
+Cada departamento fica em uma rede diferente, então sem configuração nenhuma eles não conseguem se comunicar. Para resolver isso, configurei um roteador com subinterfaces para fazer o roteamento entre as duas VLANs — a técnica conhecida como Router-on-a-Stick.
 
 ---
 
 ## Tecnologias Utilizadas
+
 - Cisco Packet Tracer
 - Cisco IOS
 - VLANs
@@ -63,15 +66,13 @@ Cada departamento pertence a uma rede diferente, o que impede a comunicação di
 
 ## Configuração do Switch
 
-### VLANs
+Criei as três VLANs no switch, sendo a 100 usada como VLAN nativa:
+
 - VLAN 10 – TI
 - VLAN 20 – Financeiro
 - VLAN 100 – Native VLAN
 
-### Trunk
-- Interface em modo trunk
-- Encapsulamento IEEE 802.1Q
-- VLAN nativa 100
+Na interface que liga o switch ao roteador, configurei modo trunk com encapsulamento IEEE 802.1Q e defini a VLAN 100 como nativa.
 
 <p align="center">
 <img src="config-switch.png" width="850">
@@ -80,11 +81,14 @@ Cada departamento pertence a uma rede diferente, o que impede a comunicação di
 ---
 
 ## Configuração do Roteador
-Foram configuradas subinterfaces com encapsulamento IEEE 802.1Q para o roteamento entre as VLANs.
+
+Configurei três subinterfaces no roteador, uma para cada VLAN, usando encapsulamento IEEE 802.1Q:
 
 - G0/0/0.10
 - G0/0/0.20
 - G0/0/0.100 (Native VLAN)
+
+Cada subinterface recebeu o IP de gateway correspondente à VLAN, permitindo que o roteador enxergasse as duas redes e fizesse o roteamento entre elas.
 
 <p align="center">
 <img src="config-roteador.png" width="850">
@@ -93,7 +97,8 @@ Foram configuradas subinterfaces com encapsulamento IEEE 802.1Q para o roteament
 ---
 
 ## Topologia Detalhada
-Topologia final do laboratório, já com as VLANs, a porta trunk e as subinterfaces do roteador configuradas para o roteamento Inter-VLAN.
+
+Essa é a topologia final, já com as VLANs, a porta trunk e as subinterfaces do roteador configuradas.
 
 <p align="center">
 <img src="Topologia-Final.png" width="1000">
@@ -102,7 +107,8 @@ Topologia final do laboratório, já com as VLANs, a porta trunk e as subinterfa
 ---
 
 ## Validação
-Testes de conectividade feitos com o comando **ping** entre dispositivos de VLANs diferentes. O roteamento Inter-VLAN funcionou, com comunicação entre os dois departamentos passando pelo roteador.
+
+Testei a conectividade com ping entre dispositivos de VLANs diferentes, pra confirmar que o roteamento Inter-VLAN estava funcionando de verdade e não só configurado no papel. O ping passou entre os dois departamentos, confirmando que o tráfego estava sendo roteado corretamente pelo roteador.
 
 <p align="center">
 <img src="teste-ping-1.png" width="1200">
@@ -113,6 +119,7 @@ Testes de conectividade feitos com o comando **ping** entre dispositivos de VLAN
 ---
 
 ## Competências Demonstradas
+
 - Criação de VLANs
 - Configuração de portas Access
 - Configuração de portas Trunk
@@ -127,4 +134,7 @@ Testes de conectividade feitos com o comando **ping** entre dispositivos de VLAN
 ---
 
 ## Aprendizados
-Neste laboratório apliquei conceitos de segmentação de redes com VLANs, configuração de portas Access e Trunk, encapsulamento IEEE 802.1Q e roteamento Inter-VLAN com a técnica Router-on-a-Stick. Também ficou mais claro como o planejamento do endereçamento IP afeta diretamente a validação da conectividade entre os segmentos da rede.
+
+Esse foi o primeiro laboratório em que apliquei Router-on-a-Stick na prática, e ficou bem mais claro depois de configurar do que só lendo sobre o assunto. A parte que mais me ajudou a entender o conceito foi ver a diferença entre a porta trunk carregando várias VLANs numa única interface física, e as subinterfaces no roteador separando esse tráfego de volta em redes distintas.
+
+Também ficou mais evidente a importância de manter a VLAN nativa igual dos dois lados (switch e roteador) — um detalhe fácil de esquecer, mas que evita problema de tráfego não identificado passando sem tag pela trunk.
