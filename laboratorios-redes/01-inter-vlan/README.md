@@ -1,14 +1,8 @@
-<h1 align="center">Laboratório de Redes - Roteamento Inter-VLAN (Router-on-a-Stick)</h1>
+<h1 align="center">Roteamento Inter-VLAN (Router-on-a-Stick)</h1>
 
 <p align="center">
-Simulação de segmentação de rede utilizando VLANs e roteamento entre elas por meio da técnica <strong>Router-on-a-Stick</strong>.
+Laboratório prático de configuração de VLANs e roteamento Inter-VLAN utilizando <strong>Router-on-a-Stick</strong>, desenvolvido no Cisco Packet Tracer.
 </p>
-
----
-
-## Objetivo
-
-Implementar uma rede segmentada em VLANs para separar departamentos distintos e permitir a comunicação entre eles através de um roteador configurado com subinterfaces e encapsulamento IEEE 802.1Q.
 
 ---
 
@@ -66,7 +60,7 @@ Cada departamento fica em uma rede diferente, então sem configuração nenhuma 
 
 ## Configuração do Switch
 
-Criei as três VLANs no switch, sendo a 100 usada como VLAN nativa:
+Criei as VLANs 10 e 20 para representar os departamentos da empresa e utilizei a VLAN 100 como VLAN nativa da conexão trunk entre o switch e o roteador.
 
 - VLAN 10 – TI
 - VLAN 20 – Financeiro
@@ -82,7 +76,7 @@ Na interface que liga o switch ao roteador, configurei modo trunk com encapsulam
 
 ## Configuração do Roteador
 
-Configurei três subinterfaces no roteador, uma para cada VLAN, usando encapsulamento IEEE 802.1Q:
+Configurei três subinterfaces no roteador utilizando encapsulamento IEEE 802.1Q, duas para as VLANs dos departamentos e uma para a VLAN nativa.
 
 - G0/0/0.10
 - G0/0/0.20
@@ -108,7 +102,7 @@ Essa é a topologia final, já com as VLANs, a porta trunk e as subinterfaces do
 
 ## Validação
 
-Testei a conectividade com ping entre dispositivos de VLANs diferentes, pra confirmar que o roteamento Inter-VLAN estava funcionando de verdade e não só configurado no papel. O ping passou entre os dois departamentos, confirmando que o tráfego estava sendo roteado corretamente pelo roteador.
+Depois de finalizar a configuração, fiz alguns testes de ping entre as VLANs para verificar se o roteamento estava funcionando corretamente. Como os dispositivos conseguiram se comunicar, confirmei que o tráfego estava sendo encaminhado pelo roteador como esperado.
 
 <p align="center">
 <img src="images/05-teste-ping1.png" width="1200">
@@ -129,16 +123,25 @@ Testei a conectividade com ping entre dispositivos de VLANs diferentes, pra conf
 - Configuração de Subinterfaces
 - Endereçamento IPv4
 - Testes de conectividade
-- Troubleshooting básico
 
 ---
 
-## Aprendizados
+## Conclusão
 
-Esse foi o primeiro laboratório em que apliquei Router-on-a-Stick na prática, e ficou bem mais claro depois de configurar do que só lendo sobre o assunto. A parte que mais me ajudou a entender o conceito foi ver a diferença entre a porta trunk carregando várias VLANs numa única interface física, e as subinterfaces no roteador separando esse tráfego de volta em redes distintas.
+Esse foi um dos primeiros laboratórios que montei no Cisco Packet Tracer e me ajudou a entender melhor como o Router-on-a-Stick funciona na prática. Ver a comunicação acontecendo entre redes diferentes deixou mais claro o papel das VLANs, da porta trunk e das subinterfaces do roteador.
 
-Também ficou mais evidente a importância de manter a VLAN nativa igual dos dois lados (switch e roteador) — um detalhe fácil de esquecer, mas que evita problema de tráfego não identificado passando sem tag pela trunk.
+Depois de configurar tudo e validar a comunicação entre os dispositivos, ficou mais fácil visualizar como esses componentes trabalham juntos para permitir o roteamento entre VLANs.
 
+---
+
+## Arquivos do laboratório
+
+Caso queira reproduzir a configuração, o arquivo do Cisco Packet Tracer está disponível neste diretório.
+
+- [lab-inter-vlan.pkt](./lab-inter-vlan.pkt)
+
+---
+ 
 ## Autor
 
 **Arthur Fernandes**
