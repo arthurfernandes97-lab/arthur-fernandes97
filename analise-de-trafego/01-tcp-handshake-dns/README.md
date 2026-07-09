@@ -70,3 +70,14 @@ Este laboratório deixou claro o passo a passo de uma conexão web. Primeiro o D
 O Three-Way Handshake (SYN, SYN/ACK, ACK) garante que a conexão TCP está confirmada dos dois lados antes de qualquer dado ser trocado. Só depois do ACK final o cliente manda a requisição HTTP de verdade.
 
 Como essa captura é HTTP puro, sem TLS, deu pra acompanhar tudo isso sem nenhuma criptografia no meio, desde a consulta DNS até o conteúdo da requisição, tudo em texto claro.
+
+## Autor
+
+**Arthur Fernandes**
+
+Estudante de Ciência da Computação
+
+Focado em Infraestrutura, Redes de Computadores e GNU/Linux.
+
+**LinkedIn:**
+[Arthur Fernandes](https://www.linkedin.com/in/arthur-fernandes-289395272)
