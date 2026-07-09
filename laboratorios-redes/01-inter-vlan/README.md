@@ -138,3 +138,14 @@ Testei a conectividade com ping entre dispositivos de VLANs diferentes, pra conf
 Esse foi o primeiro laboratório em que apliquei Router-on-a-Stick na prática, e ficou bem mais claro depois de configurar do que só lendo sobre o assunto. A parte que mais me ajudou a entender o conceito foi ver a diferença entre a porta trunk carregando várias VLANs numa única interface física, e as subinterfaces no roteador separando esse tráfego de volta em redes distintas.
 
 Também ficou mais evidente a importância de manter a VLAN nativa igual dos dois lados (switch e roteador) — um detalhe fácil de esquecer, mas que evita problema de tráfego não identificado passando sem tag pela trunk.
+
+## Autor
+
+**Arthur Fernandes**
+
+Estudante de Ciência da Computação
+
+Focado em Infraestrutura, Redes de Computadores e GNU/Linux.
+
+**LinkedIn:**
+[Arthur Fernandes](https://www.linkedin.com/in/arthur-fernandes-289395272)
