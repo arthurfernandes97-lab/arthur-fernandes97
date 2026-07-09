@@ -121,7 +121,7 @@ Depois de configurar tudo e validar a comunicação entre os dispositivos, ficou
 
 ## Arquivos do laboratório
 
-Caso queira reproduzir a configuração, o arquivo do Cisco Packet Tracer está disponível neste diretório.
+Caso queira reproduzir a configuração, o arquivo do Cisco Packet Tracer está disponível para download neste diretório.
 
 - [lab-inter-vlan.pkt](./lab-inter-vlan.pkt)
 
