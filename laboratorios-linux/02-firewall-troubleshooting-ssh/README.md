@@ -39,7 +39,8 @@ Com o ambiente pronto, testei o SSH do Debian pro CentOS antes de mexer em qualq
 </p>
 
 ## 3. Bloqueando o SSH no firewall
-Rodei `firewall-cmd --list-all` e vi que o serviço `ssh` estava na lista de permitidos. Removi com:
+Rodei um `firewall-cmd --list-all` e vi que o serviço SSH estava liberado. Removi com:
+
 ```
 firewall-cmd --remove-service=ssh --permanent
 firewall-cmd --reload
