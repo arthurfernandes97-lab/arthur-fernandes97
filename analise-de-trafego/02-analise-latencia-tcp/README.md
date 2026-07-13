@@ -21,6 +21,8 @@ Abri o arquivo sem filtro nenhum pra ter uma ideia geral do tráfego. No total, 
 <img src="images/01-visao-geral-captura.png" width="850">
 </p>
 
+---
+
 ## Isolando os pacotes com atraso
 Apliquei o filtro:
 ```
@@ -33,6 +35,8 @@ No começo entendi errado o que o filtro estava mostrando, achei que a diferenç
 <p align="center">
 <img src="images/02-filtro-tcp-time-delta.png" width="850">
 </p>
+
+---
 
 ## Investigando um dos pacotes
 Voltei a ver a captura sem filtro, ao redor do pacote 400, e reparei que o pacote 399 (um `RPC Continuation`) chegou em `4.103510`, e o pacote 400 (um `TCP ACK`) só apareceu em `4.140639`, uma diferença de 37ms.
@@ -47,6 +51,8 @@ Isso mostrou uma rajada de fragmentos `RPC Continuation` sendo confirmados quase
 <img src="images/03-stream-isolado.png" width="850">
 </p>
 
+---
+
 ## Confirmando a causa com o SEQ/ACK analysis
 Abrindo os detalhes do pacote 400, no campo `[SEQ/ACK analysis]`:
 ```
@@ -60,6 +66,8 @@ O `iRTT` é o RTT inicial da conexão, medido lá no handshake. Nesse caso, **0.
 <img src="images/04-seq-ack-analysis-pacote-400.png" width="850">
 </p>
 
+---
+
 ## Confirmando o padrão em um segundo pacote
 Pra não tirar conclusão em cima de um único exemplo, testei outro pacote da lista filtrada (o pacote 1022):
 ```
@@ -72,6 +80,8 @@ O `iRTT` é o mesmo (mesma conexão), e o RTT do ACK ficou bem próximo do prime
 <p align="center">
 <img src="images/05-confirmacao-pacote-1022.png" width="850">
 </p>
+
+---
 
 ## O que é isso, de fato
 O padrão bate com o comportamento conhecido como **TCP Delayed ACK**, inclusive eu ainda não tinha o conhecimento desse padrão de comportamento. Ao pesquisar sobre o tema, eu aprendi que em vez de confirmar cada pacote de dado recebido imediatamente, alguns sistemas esperam um pequeno intervalo (por padrão, próximo de 40ms em muitas implementações) antes de mandar o ACK na esperança de confirmar vários pacotes de uma vez só, ou aproveitar esse mesmo pacote pra já mandar dado de volta junto (piggybacking). Isso reduz a quantidade de tráfego "administrativo" na rede, em troca de um pequeno atraso na confirmação.
