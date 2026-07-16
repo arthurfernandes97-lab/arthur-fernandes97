@@ -7,7 +7,9 @@ Esse laboratório tem como objetivo analisar uma captura de tráfego contendo o 
 Para essa análise usei um arquivo de captura de referência disponibilizado pela comunidade do Wireshark, em vez de gerar uma captura própria.
 
 - **Fonte:** https://wiki.wireshark.org/samplecaptures
-- **Arquivo usado:** `netlink-conntrack.pcap`
+- **Arquivo usado:** [netlink-conntrack.pcap](./netlink-conntrack.pcap).
+  
+  `Arquivo disponível para download neste repositório.`
 
 ## Filtragem dos pacotes
 Para localizar o tráfego de DNS e TCP mais fácil, apliquei o filtro:
