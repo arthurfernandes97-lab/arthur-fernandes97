@@ -46,13 +46,13 @@ Ativei o Port Security nas portas de acesso dos dois switches, limitando a 1 MAC
 **Switch 1:**
 
 <p align="center">
-<img src="images/03-port-security-switch1.png" width="850">
+<img src="images/03-port-security-switch1.png" width="1000">
 </p>
 
 **Switch 2:**
 
 <p align="center">
-<img src="images/04-port-security-switch2.png" width="850">
+<img src="images/04-port-security-switch2.png" width="1000">
 </p>
 
 ---
@@ -61,13 +61,13 @@ Ativei o Port Security nas portas de acesso dos dois switches, limitando a 1 MAC
 Logo depois de configurar, a tabela de MACs seguros estava vazia nos dois switches. Isso porque o modo `sticky` aprende o MAC de forma dinâmica, só quando passa tráfego de verdade pela porta, não no momento em que o comando é digitado.
 
 <p align="center">
-<img src="images/05-nenhum-mac-aprendido.png" width="850">
+<img src="images/05-nenhum-mac-aprendido.png" width="1000">
 </p>
 
 Depois de dar ping entre os dispositivos, a tabela passou a mostrar o MAC de cada porta, confirmando que o aprendizado dinâmico funcionou.
 
 <p align="center">
-<img src="images/06-mac-aprendido.png" width="850">
+<img src="images/06-mac-aprendido.png" width="1000">
 </p>
 
 ---
@@ -84,13 +84,13 @@ O DHCP não funcionou para o PC de teste, e no início eu achei que fosse algum 
 Tentei o ping do PC de teste para rede da VLAN 20:
 
 <p align="center">
-<img src="images/08-ping-pc-teste-switch1.png" width="1000">
+<img src="images/08-ping-pc-teste-switch1.png" width="750">
 </p>
 
 E confirmei a violação no log do switch, mostrando o MAC não autorizado (`0040.0B84.71E0`) e a porta indo para estado de erro (`err-disable`):
 
 <p align="center">
-<img src="images/09-violation-switch1.png" width="850">
+<img src="images/09-violation-switch1.png" width="1000">
 </p>
 
 ---
@@ -103,11 +103,11 @@ Repeti o mesmo processo no Switch 2, trocando um dos dispositivos autorizados pe
 </p>
 
 <p align="center">
-<img src="images/11-ping-pc-teste-switch2.png" width="1000">
+<img src="images/11-ping-pc-teste-switch2.png" width="750">
 </p>
 
 <p align="center">
-<img src="images/12-violation-switch2.png" width="850">
+<img src="images/12-violation-switch2.png" width="1000">
 </p>
 
 ---
@@ -128,7 +128,7 @@ Switch(config-if)#no shutdown
 Repeti o mesmo processo na porta correspondente do Switch 2. Depois disso, as portas voltaram ao normal e a conectividade original foi restabelecida.
 
 <p align="center">
-<img src="images/14-reestabelecendo-conexao.png" width="850">
+<img src="images/14-reestabelecendo-conexao.png" width="1000">
 </p>
 
 ---
