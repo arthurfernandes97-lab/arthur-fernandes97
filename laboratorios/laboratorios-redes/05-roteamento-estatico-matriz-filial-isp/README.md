@@ -15,10 +15,10 @@ Neste laboratório dei continuidade à estrutura de rede dos projetos anteriores
 
 Reaproveitei a topologia de VLANs, configuradas nos laboratórios anteriores (Vendas, Administração, TI e servidor).
 
-- **VLAN 10** - Vendas — 172.16.10.0/24
-- **VLAN 20** - Administração — 172.16.20.0/24
-- **VLAN 30** - TI — 172.16.30.0/24
-- **VLAN 40** - Servidor — 172.16.40.0/24
+- **VLAN 10** - Vendas - 172.16.10.0/24
+- **VLAN 20** - Administração - 172.16.20.0/24
+- **VLAN 30** - TI - 172.16.30.0/24
+- **VLAN 40** - Servidor - 172.16.40.0/24
 
 
 <p align="center">
@@ -29,20 +29,25 @@ Reaproveitei a topologia de VLANs, configuradas nos laboratórios anteriores (Ve
 
 ## Montando a Filial
 
-Antes de conectar qualquer link externo, montei a Filial isolada (roteador, switch, 1 PC e 2 notebooks) para validar a rede local por conta própria.
+Montei a Filial isolada (roteador, switch, 1 PC e 2 notebooks) para validar a rede local por conta própria.
 
+ - **Topologia Filial**
 <p align="center">
 <img src="imagens/02-topologia-inicial-matriz-filial.png" width="850">
 </p>
 
+- **Configuração do roteador da Filial**
 <p align="center">
 <img src="imagens/03-config-interface-lan-filial.png" width="1000">
 </p>
 
+- **Definindo IPs da Filial**
 <p align="center">
-<img src="imagens/04-config-ip-hosts-filial.png" width="850">
+<img src="imagens/04-config-ip-hosts-filial.png" width="750">
 </p>
 
+- **Teste de conectividade**
+ 
 Testei o ping de cada host até o gateway e os hosts entre si, todos com 0% de perda.
 
 <p align="center">
@@ -52,19 +57,19 @@ Testei o ping de cada host até o gateway e os hosts entre si, todos com 0% de p
 ---
 
 ## Configurando o roteador ISP
-Adicionei o roteador entre a matriz e a filial para simular o provedor (ISP).
+Adicionei o roteador entre a Matriz e a Filial para simular o provedor (ISP).
 
 <p align="center">
 <img src="imagens/06-topologia-isp-adicionado.png" width="850">
 </p>
 
-### Configurações das interfaces dos roteadores (ISP e Matriz)
+- **Configurações das interfaces dos roteadores (ISP e Matriz)**
 
 <p align="center">
 <img src="imagens/07-config-interface-isp-matriz.png" width="1000">
 </p>
 
-### Configurações das interfaces dos roteadores (ISP e Filial)
+- **Configurações das interfaces dos roteadores (ISP e Filial)**
 
 <p align="center">
 <img src="imagens/08-config-interface-isp-filial.png" width="1000">
@@ -74,7 +79,7 @@ Adicionei o roteador entre a matriz e a filial para simular o provedor (ISP).
 
 ## Configurando as rotas estáticas
 
-Nos roteadores de ponta (Matriz e Filial) configurei uma rota default apontando para o ISP, já que qualquer rede fora da LAN precisa passar por ele. No ISP, configurei rotas específicas para cada rede interna, pois é ele quem conhece o caminho entre a matriz e a filial.
+Nos roteadores de ponta (Matriz e Filial) configurei uma rota default apontando para o ISP, já que qualquer rede fora da LAN precisa passar por ele. No ISP, configurei rotas específicas para cada rede interna, pois é ele quem conhece o caminho entre a Matriz e a Filial.
 
 ```
 # Matriz
@@ -92,20 +97,20 @@ ip route 192.168.50.0 255.255.255.0 200.200.201.2
 ```
 
 <p align="center">
-<img src="imagens/09-config-rotas-estaticas.png" width="1000">
+<img src="imagens/09-config-rotas-estaticas.png" width="850">
 </p>
 
 ---
 
 ## Teste de conectividade
 
-### Teste de conectividade entre a matriz e a filial com ping e tracert.
+- **Teste de conectividade entre a Matriz e a Filial com ping e tracert**
 
 <p align="center">
 <img src="imagens/10-teste-ping-tracert-matriz-filial.png" width="1000">
 </p>
 
-### Teste de conectividade entre a filial e a matriz com ping.
+- **Teste de conectividade entre a Filial e a Matriz com ping**
 
 <p align="center">
 <img src="imagens/11-teste-ping-multiplas-vlans-filial.png" width="1000">
@@ -134,7 +139,7 @@ ip access-group 130 out
 ```
 
 <p align="center">
-<img src="imagens/12-correcao-acl.png" width="950">
+<img src="imagens/12-correcao-acl.png" width="750">
 </p>
 
 Testei os quatro cenários para validar a correção. Somente o PC3 (VLAN de TI) conseguiu acessar o servidor. Nos outros testes apareceu a mensagem `Destination Host Unreachable`, confirmando que a ACL estava funcionando.
@@ -147,13 +152,13 @@ Testei os quatro cenários para validar a correção. Somente o PC3 (VLAN de TI)
 
 ## Topologia final
 
-- **VLAN 10** - Vendas — 172.16.10.0/24
-- **VLAN 20** - Administração — 172.16.20.0/24
-- **VLAN 30** - TI — 172.16.30.0/24
-- **VLAN 40** - Servidor — 172.16.40.0/24
-- **Filial** — 192.168.50.0/24
-- **Link Matriz ↔ ISP** — 200.200.200.0/30
-- **Link ISP ↔ Filial** — 200.200.201.0/30
+- **VLAN 10** - Vendas - 172.16.10.0/24
+- **VLAN 20** - Administração - 172.16.20.0/24
+- **VLAN 30** - TI - 172.16.30.0/24
+- **VLAN 40** - Servidor - 172.16.40.0/24
+- **Filial** - 192.168.50.0/24
+- **Link Matriz ↔ ISP** - 200.200.200.0/30
+- **Link ISP ↔ Filial** - 200.200.201.0/30
 
 <p align="center">
 <img src="imagens/14-topologia-final.png" width="850">
@@ -163,9 +168,9 @@ Testei os quatro cenários para validar a correção. Somente o PC3 (VLAN de TI)
 
 ## Conclusão
 
-Esse lab me mostrou como roteamento estático se comporta numa topologia com mais de dois roteadores: cada ponta só precisa de uma rota default apontando pro meio, enquanto o roteador central precisa conhecer o caminho detalhado de cada rede. Também entendi na prática a diferença entre uma sub-rede /24 de LAN e uma /30 usada só pra link ponto a ponto entre roteadores.
+Esse laboratório me mostrou como o roteamento estático se comporta numa topologia com mais de dois roteadores. Cada ponta só precisa de uma rota default apontando para o meio, enquanto o roteador central precisa conhecer o caminho detalhado de cada rede. Também entendi na prática a diferença entre uma sub-rede /24 de LAN e uma /30 usada só pra link ponto a ponto entre roteadores.
 
-O ponto mais importante foi a correção da ACL. Uma ACL que bloqueia algumas origens e libera o resto no final não é a mesma coisa que uma ACL que permite só uma origem específica — a primeira deixa brecha pra qualquer rede nova que apareça depois, como aconteceu com a Filial. Além disso, aprendi que o lugar onde a ACL é aplicada importa tanto quanto a lógica dela: ela precisa estar no ponto por onde todo o tráfego relevante obrigatoriamente passa, não apenas na origem que motivou a regra originalmente.
+O ponto mais importante foi a correção da ACL. Uma ACL que bloqueia algumas origens e libera o resto no final não é a mesma coisa que uma ACL que permite só uma origem específica. A primeira deixa brecha pra qualquer rede nova que apareça depois, como aconteceu com a Filial. Além disso, aprendi que o lugar onde a ACL é aplicada importa tanto quanto a lógica dela. Ela precisa estar no ponto por onde todo o tráfego destinado ao servidor obrigatoriamente passa, não apenas na origem que motivou a regra originalmente.
 
 ## Autor
 **Arthur Fernandes**
